@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newman Strong v2 | Academy Protocol</title>
+    <title>Newman Strong v2.1 | Academy Protocol</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Typography matching the clean aesthetic */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Oswald:wght@300;400;700&display=swap');
 
         body {
@@ -16,25 +16,16 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        .title-font {
-            font-family: 'Oswald', sans-serif;
-        }
+        .title-font { font-family: 'Oswald', sans-serif; }
 
-        /* 01. Status Check Circles */
+        /* Status Check Circles */
         .status-circle {
-            width: 80px;
-            height: 80px;
+            width: 80px; height: 80px;
             border-radius: 50%;
             border: 1px solid #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #000;
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 700; color: #000;
+            cursor: pointer; transition: all 0.2s; position: relative;
         }
         .status-circle:hover { border-color: #9ca3af; }
         .status-circle.active {
@@ -42,70 +33,38 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
         .status-circle.active::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            width: 8px;
-            height: 8px;
-            background-color: #ef4444; /* Red dot indicator */
-            border-radius: 50%;
+            content: ''; position: absolute; bottom: -3px;
+            width: 8px; height: 8px; background-color: #ef4444; border-radius: 50%;
         }
 
-        /* Grouped Box Selectors (Months & Days) */
+        /* Grouped Box Selectors */
         .btn-group {
-            display: inline-flex;
-            border: 1px solid #e5e7eb;
-            border-radius: 2px;
-            overflow: hidden;
+            display: inline-flex; border: 1px solid #e5e7eb; border-radius: 2px; overflow: hidden;
         }
         .btn-group button {
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border-right: 1px solid #e5e7eb;
-            background: #fff;
-            color: #6b7280;
-            transition: all 0.1s;
+            padding: 8px 16px; font-size: 0.85rem; font-weight: 600;
+            border-right: 1px solid #e5e7eb; background: #fff; color: #6b7280; transition: all 0.1s;
         }
         .btn-group button:last-child { border-right: none; }
         .btn-group button:hover { background: #f9fafb; color: #000; }
-        .btn-group button.active {
-            background: #000;
-            color: #fff;
-        }
+        .btn-group button.active { background: #000; color: #fff; }
 
-        /* Tabs (Profile Selection) */
+        /* Tabs */
         .tab-btn {
-            padding-bottom: 8px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #9ca3af;
-            text-transform: uppercase;
-            border-bottom: 3px solid transparent;
-            margin-right: 24px;
-            transition: all 0.2s;
+            padding-bottom: 8px; font-size: 0.85rem; font-weight: 700;
+            color: #9ca3af; text-transform: uppercase; border-bottom: 3px solid transparent;
+            margin-right: 24px; transition: all 0.2s;
         }
         .tab-btn:hover { color: #4b5563; }
-        .tab-btn.active {
-            color: #000;
-            border-bottom: 3px solid #000;
-        }
+        .tab-btn.active { color: #000; border-bottom: 3px solid #000; }
 
         /* Table Styling */
-        .table-row {
-            border-bottom: 1px solid #f3f4f6;
-        }
+        .table-row { border-bottom: 1px solid #f3f4f6; }
         .table-row:last-child { border-bottom: none; }
         
-        /* Red accent dot for Insight */
         .red-dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background-color: #ef4444;
-            border-radius: 50%;
-            margin-right: 6px;
-            vertical-align: middle;
+            display: inline-block; width: 6px; height: 6px;
+            background-color: #ef4444; border-radius: 50%; margin-right: 6px; vertical-align: middle;
         }
     </style>
 </head>
@@ -115,12 +74,12 @@
     <header class="flex flex-col md:flex-row justify-between items-start md:items-end border-b-2 border-gray-100 pb-6 mb-10">
         <div>
             <h1 class="text-4xl md:text-5xl font-black tracking-tighter uppercase">NEWMAN<span class="text-red-600">RUGBY</span></h1>
-            <p class="text-xs font-bold text-gray-400 tracking-widest mt-1">ACADEMY PROTOCOL V2.0</p>
+            <p class="text-xs font-bold text-gray-400 tracking-widest mt-1">ACADEMY PROTOCOL V2.1 // PAVEL-VERKHOSHANSKY VERIFIED</p>
         </div>
         <div class="mt-4 md:mt-0 text-right">
             <span class="text-xs font-bold text-gray-500 tracking-widest uppercase"><span class="red-dot"></span>THE FOUR PILLARS</span>
             <p class="text-sm font-medium text-gray-600 italic mt-1 max-w-md">
-                1. Sleep  //  2. Strength  //  3. Nutrition  //  4. Stress Management.<br>
+                1. Sleep  //  2. Strength  //  3. Nutrition  //  4. Stress Mgt.<br>
                 "Without these, performance is irrelevant."
             </p>
         </div>
@@ -128,7 +87,6 @@
 
     <!-- CONTROLS SECTION -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-10">
-        
         <!-- Status Check -->
         <div>
             <h2 class="text-xs font-bold tracking-widest mb-4">01. STATUS CHECK</h2>
@@ -160,10 +118,10 @@
                     <button onclick="setDay('M')" id="day-M">M</button>
                     <button onclick="setDay('T')" id="day-T">T</button>
                     <button onclick="setDay('W')" id="day-W">W</button>
-                    <button onclick="setDay('TH')" id="day-TH" class="active">T</button>
+                    <button onclick="setDay('TH')" id="day-TH" class="active">TH</button>
                     <button onclick="setDay('F')" id="day-F">F</button>
                     <button onclick="setDay('S')" id="day-S">S</button>
-                    <button onclick="setDay('SU')" id="day-SU">S</button>
+                    <button onclick="setDay('SU')" id="day-SU">SU</button>
                 </div>
             </div>
         </div>
@@ -196,17 +154,22 @@
 
     <!-- MAIN WORKOUT SECTION -->
     <main>
-        <div class="mb-8">
+        <div class="mb-6">
             <h2 id="day-title" class="text-5xl font-light title-font tracking-tight uppercase">THURSDAY</h2>
-            <h3 id="day-subtitle" class="text-sm font-bold text-gray-400 tracking-widest uppercase mt-2">ARMOR + GRIP</h3>
+            <h3 id="day-subtitle" class="text-sm font-bold text-gray-400 tracking-widest uppercase mt-2">POST-MATCH TRIAGE</h3>
         </div>
 
-        <!-- Table Header -->
+        <div id="primer-container">
+            <!-- JS Inject Primer -->
+        </div>
+
+        <!-- Table Header (12 Cols) -->
         <div class="grid grid-cols-12 gap-4 pb-2 border-b border-black text-xs font-bold text-gray-400 tracking-widest uppercase">
             <div class="col-span-1">CODE</div>
-            <div class="col-span-6 md:col-span-7">EXERCISE</div>
-            <div class="col-span-2">SET/REP</div>
-            <div class="col-span-3 md:col-span-2 text-right">CUE</div>
+            <div class="col-span-4 md:col-span-4">EXERCISE</div>
+            <div class="col-span-3 md:col-span-3">SET/REP</div>
+            <div class="col-span-1 text-center">RPE</div>
+            <div class="col-span-3 md:col-span-3 text-right">CUE / INTENT</div>
         </div>
 
         <!-- Table Body -->
@@ -218,16 +181,12 @@
     <script>
         // --- S&C ENGINE STATE ---
         let state = {
-            status: 'GREEN', // GREEN, AMBER, RED
-            month: 'SEP',    // SEP, OCT, NOV, DEC, JAN, FEB, MAR, OFF
-            day: 'TH',       // M, T, W, TH, F, S, SU
-            profile: 'M_ARMOR' // M_ARMOR, M_POWER, F_ARMOR, F_POWER
+            status: 'GREEN', month: 'SEP', day: 'TH', profile: 'M_ARMOR' 
         };
 
-        // --- DATABASE ---
         const dayNames = { M: 'MONDAY', T: 'TUESDAY', W: 'WEDNESDAY', TH: 'THURSDAY', F: 'FRIDAY', S: 'SATURDAY', SU: 'SUNDAY' };
+        const stdPrimer = "Hardstyle Plank (10s max tension) + Bottoms-Up Cleans (2x5/side). Irradiate the CNS.";
 
-        // Determine macrocycle phase based on month
         function getPhase() {
             if (['SEP', 'OCT'].includes(state.month)) return 'EARLY_SEASON';
             if (['NOV', 'DEC', 'JAN'].includes(state.month)) return 'MID_SEASON';
@@ -235,60 +194,133 @@
             return 'OFF_SEASON';
         }
 
-        // Base templates (The "What")
+        // --- DATABASE ARCHITECTURE (PAVEL & VERKHOSHANSKY RULES APPLIED) ---
+        // Every exercise has hardcoded repsA (Armor) and repsP (Power) to prevent "Max Speed Hangs"
         const templates = {
             EARLY_SEASON: {
-                M: { title: "LOWER MICRO-DOSE", exercises: [{code: 'A', name: 'Goblet Box Squat', cue: 'Limit ROM'}, {code: 'B', name: 'Suitcase Carries', cue: 'Anti-flexion'}, {code: 'C', name: 'RKC Plank', cue: 'Full tension'}] },
-                T: { title: "UPPER NEURAL PRIMER", exercises: [{code: 'A', name: 'Med Ball Rotational Throws', cue: 'Max velocity'}, {code: 'B', name: 'Push-ups', cue: 'Explosive'}, {code: 'C', name: 'Band Pull-Aparts', cue: 'Scapular health'}] },
-                W: { title: "MATCH DAY", exercises: [{code: 'A', name: 'Pre-Match Mobility Flow', cue: 'Dynamic'}, {code: 'B', name: 'Game Execution', cue: 'Redline'}] },
-                TH: { title: "POST-MATCH TRIAGE", exercises: [{code: 'A', name: 'Passive Bar Hang', cue: 'Decompress spine'}, {code: 'B', name: 'Wall Sit', cue: 'Tendon relief'}, {code: 'C', name: 'Nasal Breathing Walk', cue: 'Flush system'}] },
-                F: { title: "ARMOR MAINTENANCE", exercises: [{code: 'A', name: 'Trap Bar Deadlift', cue: 'Perfect spine'}, {code: 'B', name: 'Heavy DB Row', cue: 'Squeeze lats'}, {code: 'C', name: '[M_SWAP_SHRUGS]', cue: 'Armor/Prehab'}] },
-                S: { title: "ABSOLUTE REST", exercises: [{code: 'A', name: 'Sleep / Hydration', cue: 'Recovery'}, {code: 'B', name: 'Mental Disconnect', cue: 'Parasympathetic'}] },
-                SU: { title: "ZONE 2 BASE", exercises: [{code: 'A', name: 'Light Ruck or Row', cue: 'HR < 140bpm'}, {code: 'B', name: 'Joint Mobility', cue: 'Grease grooves'}] }
+                M: { title: "LOWER MICRO-DOSE & GRIP", primer: stdPrimer, exercises: [
+                    {code: 'A', name: 'Goblet Box Squat', repsA: '3 x 8-12', repsP: '4 x 3-5', rpe: '7', cue: 'Limit ROM. Root the feet.'}, 
+                    {code: 'B', name: 'Heavy Suitcase March', repsA: '3 x 45s/side', repsP: '3 x 45s/side', rpe: '8', cue: 'Zero torso sway. Crush the handle.'}, 
+                    {code: 'C', name: 'Yielding Iso Split Squat', repsA: '3 x 30s/leg', repsP: '3 x 30s/leg', rpe: '7', cue: 'Build tendon stiffness. Breathe.'}
+                ]},
+                T: { title: "UPPER NEURAL PRIMER", primer: stdPrimer, exercises: [
+                    {code: 'A', name: 'Med Ball Rotational Throws', repsA: '3 x 5/side', repsP: '3 x 5/side', rpe: '9', cue: 'Max velocity. Snap the hips.'}, 
+                    {code: 'B', name: 'Towel Pull-Ups / Towel Hangs', repsA: '3 x Max Time/Reps', repsP: '3 x Max Time/Reps', rpe: '8', cue: 'White-knuckle the towel.'}, 
+                    {code: 'C', name: 'Band Pull-Aparts', repsA: '3 x 15', repsP: '3 x 15', rpe: '6', cue: 'Scapular health.'}
+                ]},
+                W: { title: "MATCH DAY // BYE-WEEK ALACTIC", primer: null, exercises: [
+                    {code: 'IN', name: 'Match Execution (If Selected)', repsA: 'Game Time', repsP: 'Game Time', rpe: '10', cue: 'Redline.'}, 
+                    {code: 'BYE', name: 'Overspeed Towel Swings', repsA: '10s ON / 50s OFF (x10)', repsP: '10s ON / 50s OFF (x10)', rpe: '8', cue: 'Verkhoshansky strict. Zero lactic burn.'}
+                ]},
+                TH: { title: "POST-MATCH TRIAGE", primer: null, exercises: [
+                    {code: 'A', name: 'Passive Bar Hang', repsA: '3 x 30s', repsP: '3 x 30s', rpe: 'N/A', cue: 'Decompress spine.'}, 
+                    {code: 'B', name: 'Yielding Wall Sit', repsA: '3 x 45s', repsP: '3 x 45s', rpe: '6', cue: 'Tendon relief.'}, 
+                    {code: 'C', name: 'Nasal Breathing Walk', repsA: '15 Mins', repsP: '15 Mins', rpe: '4', cue: 'Flush system.'}
+                ]},
+                F: { title: "ARMOR MAINTENANCE", primer: stdPrimer, exercises: [
+                    {code: 'A', name: 'Trap Bar Deadlift', repsA: '3 x 6-8', repsP: '4 x 3', rpe: '8', cue: 'Perfect spine. Leave 1 rep in bank.'}, 
+                    {code: 'B', name: 'Heavy DB Row', repsA: '3 x 8', repsP: '4 x 5', rpe: '7', cue: 'Squeeze lats.'}, 
+                    {code: 'C', name: '[M_SWAP_SHRUGS]', repsA: '3 x 12', repsP: '3 x 8', rpe: '8', cue: '[DYNAMIC_CUE]'}
+                ]},
+                S: { title: "ABSOLUTE REST", primer: null, exercises: [
+                    {code: '-', name: 'Sleep / Hydration', repsA: 'Required', repsP: 'Required', rpe: 'N/A', cue: 'Recovery'}, 
+                    {code: '-', name: 'Mental Disconnect', repsA: 'Required', repsP: 'Required', rpe: 'N/A', cue: 'Parasympathetic reset'}
+                ]},
+                SU: { title: "ZONE 2 BASE", primer: null, exercises: [
+                    {code: 'A', name: 'Light Ruck or Row', repsA: '30 Mins', repsP: '30 Mins', rpe: '5', cue: 'HR < 140bpm. Nasal only.'}, 
+                    {code: 'B', name: 'Joint Mobility', repsA: '10 Mins', repsP: '10 Mins', rpe: 'N/A', cue: 'Grease grooves.'}
+                ]}
             },
-            MID_SEASON: { // The Grind - Reduce volume, maintain armor
-                M: { title: "ISOMETRIC LOWER", exercises: [{code: 'A', name: 'Heavy Sled Push', cue: 'Concentric only'}, {code: 'B', name: 'Copenhagen Plank', cue: 'Adductor health'}, {code: 'C', name: 'Dead Bug', cue: 'Core control'}] },
-                T: { title: "UPPER SPEED", exercises: [{code: 'A', name: 'DB Push Press', cue: 'Use legs'}, {code: 'B', name: 'Chest Supported Row', cue: 'Protect low back'}] },
-                W: { title: "MATCH DAY", exercises: [{code: 'A', name: 'Pre-Match Mobility Flow', cue: 'Dynamic'}, {code: 'B', name: 'Game Execution', cue: 'Redline'}] },
-                TH: { title: "TRIAGE & RECOVERY", exercises: [{code: 'A', name: 'Stationary Bike', cue: 'Flush legs'}, {code: 'B', name: 'Foam Roll / Soft Tissue', cue: 'Release fascia'}] },
-                F: { title: "HEAVY SINGLES", exercises: [{code: 'A', name: 'Box Squat', cue: 'Velocity focus'}, {code: 'B', name: 'Strict Pull-ups', cue: 'Full range'}] },
-                S: { title: "ABSOLUTE REST", exercises: [{code: 'A', name: 'Sleep / Hydration', cue: 'Recovery'}] },
-                SU: { title: "ACTIVE RECOVERY", exercises: [{code: 'A', name: 'Light Swimming / Walk', cue: 'Zero impact'}] }
+            MID_SEASON: { 
+                M: { title: "ISOMETRIC LOWER", primer: stdPrimer, exercises: [
+                    {code: 'A', name: 'Heavy Suitcase March', repsA: '3 x 60s/side', repsP: '3 x 60s/side', rpe: '8', cue: 'Core stiffness. No lean.'}, 
+                    {code: 'B', name: 'Copenhagen Plank', repsA: '3 x 20s/side', repsP: '3 x 20s/side', rpe: '7', cue: 'Adductor health.'}, 
+                    {code: 'C', name: 'Dead Bug', repsA: '3 x 10/side', repsP: '3 x 10/side', rpe: '6', cue: 'Core control.'}
+                ]},
+                T: { title: "UPPER SPEED", primer: stdPrimer, exercises: [
+                    {code: 'A', name: 'DB Push Press', repsA: '3 x 8', repsP: '4 x 4', rpe: '8', cue: 'Use legs. Fast lockout.'}, 
+                    {code: 'B', name: 'Towel Pull-Ups', repsA: '3 x Max', repsP: '4 x Sub-Max', rpe: '8', cue: 'Protect low back. Grip focus.'}
+                ]},
+                W: { title: "MATCH DAY // BYE-WEEK ALACTIC", primer: null, exercises: [
+                    {code: 'IN', name: 'Match Execution', repsA: 'Game Time', repsP: 'Game Time', rpe: '10', cue: 'Redline execution.'},
+                    {code: 'BYE', name: 'Overspeed Towel Swings', repsA: '10s ON / 50s OFF (x10)', repsP: '10s ON / 50s OFF (x10)', rpe: '8', cue: 'Max violence. Zero fatigue.'}
+                ]},
+                TH: { title: "TRIAGE & RECOVERY", primer: null, exercises: [
+                    {code: 'A', name: 'Stationary Bike', repsA: '15 Mins', repsP: '15 Mins', rpe: '4', cue: 'Flush legs.'}, 
+                    {code: 'B', name: 'Passive Hang', repsA: '3 x 30s', repsP: '3 x 30s', rpe: 'N/A', cue: 'Decompress.'}
+                ]},
+                F: { title: "HEAVY SINGLES (POWER)", primer: stdPrimer, exercises: [
+                    {code: 'A', name: 'Box Squat', repsA: '3 x 5', repsP: '5 x 1-2', rpe: '8', cue: 'Velocity focus. Stand up fast.'}, 
+                    {code: 'B', name: 'Strict Pull-ups', repsA: '3 x 8', repsP: '4 x 3', rpe: '7', cue: 'Full range.'}
+                ]},
+                S: { title: "ABSOLUTE REST", primer: null, exercises: [{code: '-', name: 'Sleep / Hydration', repsA: '-', repsP: '-', rpe: 'N/A', cue: 'Recovery'}] },
+                SU: { title: "ACTIVE RECOVERY", primer: null, exercises: [{code: '-', name: 'Light Walk', repsA: '30 Mins', repsP: '30 Mins', rpe: '3', cue: 'Zero impact'}] }
             },
-            LATE_SEASON: { // Peaking - Highly neural, alactic
-                M: { title: "ALACTIC PRIMER", exercises: [{code: 'A', name: 'Broad Jumps', cue: 'Reset every rep'}, {code: 'B', name: 'Heavy Kettlebell Swings', cue: 'Glute snap'}] },
-                T: { title: "SPEED & SKILL", exercises: [{code: 'A', name: 'Contrast Push-ups', cue: 'Band resisted to free'}, {code: 'B', name: 'Rotational Core', cue: 'Speed'}] },
-                W: { title: "FINALS PREP", exercises: [{code: 'A', name: 'Game Execution', cue: 'Peak output'}] },
-                TH: { title: "CNS RESET", exercises: [{code: 'A', name: '1:4:2 Box Breathing', cue: 'Kill adrenaline'}] },
-                F: { title: "POWER MAINTENANCE", exercises: [{code: 'A', name: 'Power Cleans / High Pulls', cue: 'Fast elbows'}, {code: 'B', name: 'Medicine Ball Slams', cue: 'Violent extension'}] },
-                S: { title: "ABSOLUTE REST", exercises: [{code: 'A', name: 'Sleep / Hydration', cue: 'Recovery'}] },
-                SU: { title: "TACTICAL PREP", exercises: [{code: 'A', name: 'Film Study / Walkthrough', cue: 'Mental'}] }
+            LATE_SEASON: { 
+                M: { title: "ALACTIC PRIMER", primer: stdPrimer, exercises: [
+                    {code: 'A', name: 'Broad Jumps', repsA: '3 x 3', repsP: '4 x 3', rpe: '9', cue: 'Reset completely every rep.'}, 
+                    {code: 'B', name: 'Heavy Suitcase March', repsA: '3 x 45s/side', repsP: '3 x 45s/side', rpe: '8', cue: 'Grip vice.'}
+                ]},
+                T: { title: "SPEED & SKILL", primer: stdPrimer, exercises: [
+                    {code: 'A', name: 'Contrast Push-ups', repsA: '3 x 6', repsP: '4 x 4', rpe: '8', cue: 'Band resisted to free.'}, 
+                    {code: 'B', name: 'Towel Hangs (Iso)', repsA: '3 x Max Hold', repsP: '3 x Max Hold', rpe: '9', cue: 'Crush it.'}
+                ]},
+                W: { title: "FINALS PREP // ALACTIC", primer: null, exercises: [
+                    {code: 'IN', name: 'Game Execution', repsA: 'Game Time', repsP: 'Game Time', rpe: '10', cue: 'Peak output.'},
+                    {code: 'BYE', name: 'Overspeed KB Swings', repsA: '10s ON / 50s OFF (x10)', repsP: '10s ON / 50s OFF (x10)', rpe: '8', cue: 'Pure alactic.'}
+                ]},
+                TH: { title: "CNS RESET", primer: null, exercises: [
+                    {code: 'A', name: '1:4:2 Box Breathing', repsA: '5 Mins', repsP: '5 Mins', rpe: 'N/A', cue: 'Kill adrenaline.'}
+                ]},
+                F: { title: "POWER MAINTENANCE", primer: stdPrimer, exercises: [
+                    {code: 'A', name: 'Power Cleans / High Pulls', repsA: '3 x 5', repsP: '4 x 2-3', rpe: '8', cue: 'Fast elbows.'}, 
+                    {code: 'B', name: 'Medicine Ball Slams', repsA: '3 x 8', repsP: '4 x 5', rpe: '9', cue: 'Violent extension.'}
+                ]},
+                S: { title: "ABSOLUTE REST", primer: null, exercises: [{code: '-', name: 'Sleep / Hydration', repsA: '-', repsP: '-', rpe: 'N/A', cue: 'Recovery'}] },
+                SU: { title: "TACTICAL PREP", primer: null, exercises: [{code: '-', name: 'Film Study / Walkthrough', repsA: '-', repsP: '-', rpe: 'N/A', cue: 'Mental'}] }
             },
-            OFF_SEASON: { // Building Mass/Power
-                M: { title: "MAXIMAL LOWER", exercises: [{code: 'A', name: 'Barbell Back/Front Squat', cue: 'Depth & Drive'}, {code: 'B', name: '[F_SWAP_RDL]', cue: 'Posterior chain'}, {code: 'C', name: 'Weighted Carries', cue: 'Core stiffness'}] },
-                T: { title: "MAXIMAL UPPER", exercises: [{code: 'A', name: 'Bench Press / Floor Press', cue: 'Lockout'}, {code: 'B', name: 'Weighted Pull-ups', cue: 'Lat dominant'}, {code: 'C', name: 'Overhead Press', cue: 'Core braced'}] },
-                W: { title: "FIELD CONDITIONING", exercises: [{code: 'A', name: 'Tempo Runs', cue: 'Aerobic power'}, {code: 'B', name: 'Agility Ladder/Cones', cue: 'Footwork'}] },
-                TH: { title: "ALACTIC ENGINE", exercises: [{code: 'A', name: 'Overspeed KB Swings', cue: '10s On / 50s Off'}, {code: 'B', name: 'Sprints (10-20m)', cue: 'Full recovery between'}] },
-                F: { title: "FULL BODY CONTRAST", exercises: [{code: 'A1', name: 'Heavy Trap Bar DL', cue: 'Force'}, {code: 'A2', name: 'Vertical Jump', cue: 'Speed'}, {code: 'B', name: '[M_SWAP_SHRUGS]', cue: 'Armor'}] },
-                S: { title: "REST OR PICKUP", exercises: [{code: 'A', name: 'Pickup Touch Rugby', cue: 'Play'}] },
-                SU: { title: "LONG ZONE 2", exercises: [{code: 'A', name: '5k Ruck or 10k Bike', cue: 'Base building'}] }
+            OFF_SEASON: { 
+                M: { title: "MAXIMAL LOWER", primer: stdPrimer, exercises: [
+                    {code: 'A', name: 'Barbell Back/Front Squat', repsA: '4 x 6-8', repsP: '5 x 3-5', rpe: '8', cue: 'Depth & Drive. Keep 1 in bank.'}, 
+                    {code: 'B', name: '[F_SWAP_RDL]', repsA: '3 x 8', repsP: '4 x 5', rpe: '7', cue: '[DYNAMIC_CUE]'}, 
+                    {code: 'C', name: 'Heavy Suitcase March', repsA: '3 x 60s/side', repsP: '3 x 60s/side', rpe: '8', cue: 'Core stiffness.'}
+                ]},
+                T: { title: "MAXIMAL UPPER", primer: stdPrimer, exercises: [
+                    {code: 'A', name: 'Bench Press / Floor Press', repsA: '4 x 6-8', repsP: '5 x 3-5', rpe: '8', cue: 'Lockout. Break the bar.'}, 
+                    {code: 'B', name: 'Towel Pull-ups', repsA: '3 x Max', repsP: '4 x Sub-Max', rpe: '8', cue: 'Lat dominant.'}, 
+                    {code: 'C', name: 'Yielding Iso Split Squat', repsA: '3 x 30s/leg', repsP: '3 x 30s/leg', rpe: '7', cue: 'Tendon conditioning.'}
+                ]},
+                W: { title: "ALACTIC ENGINE (OFF-SEASON)", primer: null, exercises: [
+                    {code: 'A', name: 'Overspeed Towel Swings', repsA: '10s ON / 50s OFF (x10)', repsP: '10s ON / 50s OFF (x10)', rpe: '9', cue: 'Verkhoshansky strict. Max power.'}, 
+                    {code: 'B', name: 'Sprints (10-20m)', repsA: '5-8 Sprints', repsP: '5-8 Sprints', rpe: '9', cue: 'Full recovery between.'}
+                ]},
+                TH: { title: "RECOVERY / ZONE 2", primer: null, exercises: [
+                    {code: 'A', name: 'Bike or Swim', repsA: '20 Mins', repsP: '20 Mins', rpe: '4', cue: 'HR < 130bpm.'}, 
+                    {code: 'B', name: 'Passive Bar Hang', repsA: '3 x 30s', repsP: '3 x 30s', rpe: 'N/A', cue: 'Decompress.'}
+                ]},
+                F: { title: "FULL BODY CONTRAST", primer: stdPrimer, exercises: [
+                    {code: 'A1', name: 'Heavy Trap Bar DL', repsA: '3 x 5', repsP: '4 x 3', rpe: '8', cue: 'Force production.'}, 
+                    {code: 'A2', name: 'Vertical Jump', repsA: '3 x 3', repsP: '4 x 3', rpe: '9', cue: 'Speed conversion.'}, 
+                    {code: 'B', name: '[M_SWAP_SHRUGS]', repsA: '3 x 10', repsP: '4 x 6', rpe: '8', cue: '[DYNAMIC_CUE]'}
+                ]},
+                S: { title: "REST OR PICKUP", primer: null, exercises: [{code: 'A', name: 'Pickup Touch Rugby', repsA: 'Play', repsP: 'Play', rpe: '7', cue: 'Play'}] },
+                SU: { title: "LONG ZONE 2", primer: null, exercises: [{code: 'A', name: '5k Ruck or 10k Bike', repsA: '45 Mins', repsP: '45 Mins', rpe: '5', cue: 'Base building'}] }
             }
         };
 
-        // Red Status Override
         const redOverride = {
-            title: "CNS TRIAGE (RED STATUS)",
+            title: "CNS TRIAGE (RED STATUS)", primer: null,
             exercises: [
-                {code: '-', name: '1:4:2 Breathing Protocol', cue: '10 minutes'},
-                {code: '-', name: 'Passive Hangs', cue: '3 x 30s'},
-                {code: '-', name: 'Light Zone 1 Walk', cue: 'Nasal breathing only'}
+                {code: '-', name: '1:4:2 Breathing Protocol', repsA: '10 mins', repsP: '10 mins', rpe: 'N/A', cue: 'Kill adrenaline.'},
+                {code: '-', name: 'Passive Hangs', repsA: '3 x 30s', repsP: '3 x 30s', rpe: 'N/A', cue: 'Decompress spine.'},
+                {code: '-', name: 'Light Zone 1 Walk', repsA: '20 mins', repsP: '20 mins', rpe: '3', cue: 'Nasal breathing only.'}
             ]
         };
 
         // --- RENDER FUNCTIONS ---
 
         function updateUI() {
-            // Status update
+            // Status Update
             ['GREEN', 'AMBER', 'RED'].forEach(s => {
                 const el = document.getElementById(`status-${s}`);
                 el.classList.remove('active', 'border-black', 'border-red-600', 'border-2');
@@ -301,7 +333,7 @@
 
             const statusDescs = {
                 'GREEN': '100% Capacity. Cleared for prescribed loading.',
-                'AMBER': '70% Capacity. Reduce working sets by 1. Cap intensity at RPE 7.',
+                'AMBER': '70% Capacity. Drop 1 working set. Maintain RPE limits.',
                 'RED': '0% Capacity. CNS exhausted. Mandatory recovery protocol active.'
             };
             document.getElementById('status-desc').innerText = statusDescs[state.status];
@@ -313,20 +345,12 @@
             if (state.status === 'AMBER') { capBar.style.width = '70%'; capBar.className = 'h-1 bg-yellow-500 w-full transition-all duration-500'; capText.innerText = '70%'; }
             if (state.status === 'RED') { capBar.style.width = '15%'; capBar.className = 'h-1 bg-red-600 w-full transition-all duration-500'; capText.innerText = 'RECOVERY'; }
 
-            // Month Update
-            ['SEP','OCT','NOV','DEC','JAN','FEB','MAR','OFF'].forEach(m => {
-                document.getElementById(`mo-${m}`).classList.toggle('active', m === state.month);
-            });
-
-            // Day Update
-            ['M','T','W','TH','F','S','SU'].forEach(d => {
-                document.getElementById(`day-${d}`).classList.toggle('active', d === state.day);
-            });
+            // Month & Day
+            ['SEP','OCT','NOV','DEC','JAN','FEB','MAR','OFF'].forEach(m => document.getElementById(`mo-${m}`).classList.toggle('active', m === state.month));
+            ['M','T','W','TH','F','S','SU'].forEach(d => document.getElementById(`day-${d}`).classList.toggle('active', d === state.day));
 
             // Profile Update
-            ['M_ARMOR','M_POWER','F_ARMOR','F_POWER'].forEach(p => {
-                document.getElementById(`prof-${p}`).classList.toggle('active', p === state.profile);
-            });
+            ['M_ARMOR','M_POWER','F_ARMOR','F_POWER'].forEach(p => document.getElementById(`prof-${p}`).classList.toggle('active', p === state.profile));
 
             const profileDescs = {
                 'M_ARMOR': 'MALE (1-2 YRS) // HYPERTROPHY FOCUS. Moderate weights. Structural development for collision padding.',
@@ -343,7 +367,7 @@
             const phase = getPhase();
             let dayData = templates[phase][state.day];
             
-            // Apply RED status override if necessary (except on rest days)
+            // RED status override (Except standard rest days)
             if (state.status === 'RED' && !['S', 'W'].includes(state.day)) {
                 dayData = redOverride;
             }
@@ -354,14 +378,16 @@
             let isFemale = state.profile.includes('F_');
             let isPower = state.profile.includes('POWER');
 
-            // Set/Rep logic based on profile and status
-            let repsBase = isPower ? "4 x 3-5" : "3 x 8-12";
-            let timeBase = isPower ? "4 x Max Speed" : "3 x 45s";
-            
-            // Amber status penalty
-            if (state.status === 'AMBER' && state.day !== 'S' && state.day !== 'SU') {
-                repsBase = isPower ? "3 x 3-5 (RPE 7)" : "2 x 8-12 (RPE 7)";
-                timeBase = "2 x 30s";
+            // Render Primer Block
+            const primerDiv = document.getElementById('primer-container');
+            if (dayData.primer && state.status !== 'RED' && !['S', 'SU', 'W'].includes(state.day)) {
+                primerDiv.innerHTML = `
+                    <div class="bg-gray-50 border-l-4 border-red-500 p-4 mb-6">
+                        <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1"><i class="fa-solid fa-bolt mr-1"></i> CNS PRIMER (IRRADIATION)</span>
+                        <span class="text-sm font-semibold text-gray-800">${dayData.primer}</span>
+                    </div>`;
+            } else {
+                primerDiv.innerHTML = '';
             }
 
             let html = '';
@@ -369,27 +395,31 @@
             dayData.exercises.forEach(ex => {
                 let finalName = ex.name;
                 let finalCue = ex.cue;
-                let finalReps = finalName.includes('Plank') || finalName.includes('Hang') || finalName.includes('Wall Sit') ? timeBase : repsBase;
+                let finalReps = isPower ? ex.repsP : ex.repsA;
+                let finalRPE = ex.rpe;
 
-                // Rest days overrides
-                if (['S', 'SU', 'W'].includes(state.day) || state.status === 'RED') finalReps = 'N/A';
+                // Amber status penalty (-1 Set)
+                if (state.status === 'AMBER' && !['S', 'SU', 'W'].includes(state.day) && !finalName.includes('Sleep') && finalReps !== 'N/A') {
+                    finalReps = finalReps + " <span class='text-red-500 text-xs'>(-1 Set)</span>";
+                }
 
-                // --- BIOLOGICAL SWAPS ---
+                // Biological Swaps
                 if (finalName === '[M_SWAP_SHRUGS]') {
                     finalName = isFemale ? 'Nordic Hamstring Curls' : 'Heavy Barbell Shrugs';
-                    finalCue = isFemale ? 'ACL Protection' : 'Concussion Armor';
+                    finalCue = isFemale ? 'ACL Protection (Verkhoshansky Eccentric).' : 'Upper structural concussion armor.';
                 }
                 if (finalName === '[F_SWAP_RDL]') {
                     finalName = isFemale ? 'Single-Leg RDLs' : 'Romanian Deadlift';
-                    finalCue = isFemale ? 'Knee stability' : 'Hamstring sweep';
+                    finalCue = isFemale ? 'Pelvic/Knee stability lock.' : 'Hamstring sweep. Hinge hard.';
                 }
 
                 html += `
                 <div class="grid grid-cols-12 gap-4 py-5 table-row items-center transition-colors hover:bg-gray-50">
                     <div class="col-span-1 text-sm font-bold text-gray-400">${ex.code}</div>
-                    <div class="col-span-6 md:col-span-7 font-bold text-gray-900">${finalName}</div>
-                    <div class="col-span-2 text-sm font-semibold">${finalReps}</div>
-                    <div class="col-span-3 md:col-span-2 text-sm text-gray-400 italic text-right">${finalCue}</div>
+                    <div class="col-span-4 md:col-span-4 font-bold text-gray-900">${finalName}</div>
+                    <div class="col-span-3 md:col-span-3 text-sm font-semibold">${finalReps}</div>
+                    <div class="col-span-1 text-center text-sm font-bold bg-gray-100 rounded px-1 py-1 text-gray-700">${finalRPE !== 'N/A' ? 'RPE ' + finalRPE : '-'}</div>
+                    <div class="col-span-3 md:col-span-3 text-sm text-gray-500 italic text-right">${finalCue}</div>
                 </div>`;
             });
 
