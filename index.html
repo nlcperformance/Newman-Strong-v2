@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newman Strong v2.1 | Academy Protocol</title>
+    <title>Newman Strong v2.2 | Academy Protocol</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -14,6 +14,7 @@
             background-color: #ffffff;
             color: #000000;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         .title-font { font-family: 'Oswald', sans-serif; }
@@ -66,15 +67,73 @@
             display: inline-block; width: 6px; height: 6px;
             background-color: #ef4444; border-radius: 50%; margin-right: 6px; vertical-align: middle;
         }
+
+        /* Vertical Tab Button */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body class="min-h-screen p-6 md:p-12 max-w-6xl mx-auto">
+
+    <!-- FLOATING PRE-HAB BUTTON -->
+    <button id="warmup-trigger" class="fixed right-0 top-1/3 bg-red-600 text-white py-6 px-2 rounded-l-lg font-bold text-xs tracking-widest shadow-2xl z-40 hover:bg-red-700 transition-colors vertical-text">
+        PRE-HAB CIRCUIT
+    </button>
+
+    <!-- SLIDING PRE-HAB PANEL -->
+    <div id="warmup-overlay" class="fixed inset-0 bg-black/60 z-40 hidden transition-opacity backdrop-blur-sm"></div>
+    <div id="warmup-panel" class="fixed top-0 right-0 h-full w-80 bg-[#121212] border-l border-zinc-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-black text-white tracking-tighter title-font uppercase">7-MIN ARMOR <span class="text-red-600">CIRCUIT</span></h2>
+                <button id="close-warmup" class="text-zinc-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+            </div>
+            
+            <p class="text-xs text-red-500 mb-6 font-bold tracking-widest border-b border-zinc-800 pb-3">MANDATORY STANDARDIZED WARM-UP</p>
+            
+            <div class="space-y-5 text-sm">
+                <div>
+                    <strong class="text-white block font-bold"><i class="fa-solid fa-angle-right text-red-600 mr-2 text-xs"></i>1. Tib Raises</strong>
+                    <span class="text-zinc-400 block mt-1 ml-4 leading-tight">20 reps. Builds ankle/Achilles armor against turf friction.</span>
+                </div>
+                <div>
+                    <strong class="text-white block font-bold"><i class="fa-solid fa-angle-right text-red-600 mr-2 text-xs"></i>2. Single Leg Calf Raises</strong>
+                    <span class="text-zinc-400 block mt-1 ml-4 leading-tight">15 reps per leg. Lower leg resilience and ankle stiffness.</span>
+                </div>
+                <div>
+                    <strong class="text-white block font-bold"><i class="fa-solid fa-angle-right text-red-600 mr-2 text-xs"></i>3. Cossack Squats</strong>
+                    <span class="text-zinc-400 block mt-1 ml-4 leading-tight">8 reps per side. Unlocks adductors for multi-directional cutting.</span>
+                </div>
+                <div>
+                    <strong class="text-white block font-bold"><i class="fa-solid fa-angle-right text-red-600 mr-2 text-xs"></i>4. Lu Raises</strong>
+                    <span class="text-zinc-400 block mt-1 ml-4 leading-tight">15 reps. Unlocks and protects against shoulder impingement.</span>
+                </div>
+                <div>
+                    <strong class="text-white block font-bold"><i class="fa-solid fa-angle-right text-red-600 mr-2 text-xs"></i>5. Sprinter's Iso Holds</strong>
+                    <span class="text-zinc-400 block mt-1 ml-4 leading-tight">20s hold per side. Glute/Hamstring synchronization prep.</span>
+                </div>
+                <div>
+                    <strong class="text-white block font-bold"><i class="fa-solid fa-angle-right text-red-600 mr-2 text-xs"></i>6. Stiff Leg Pogos</strong>
+                    <span class="text-zinc-400 block mt-1 ml-4 leading-tight">20 reps. Primes tendon elasticity and Achilles fast-twitch.</span>
+                </div>
+                <div class="pb-6">
+                    <strong class="text-white block font-bold"><i class="fa-solid fa-angle-right text-red-600 mr-2 text-xs"></i>7. Plyo Press-Ups</strong>
+                    <span class="text-zinc-400 block mt-1 ml-4 leading-tight">5-8 reps (Knees or Full). <span class="text-red-400 font-semibold">Strict 3-second eccentric descent.</span> Triphasic force absorption prep.</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- HEADER -->
     <header class="flex flex-col md:flex-row justify-between items-start md:items-end border-b-2 border-gray-100 pb-6 mb-10">
         <div>
             <h1 class="text-4xl md:text-5xl font-black tracking-tighter uppercase">NEWMAN<span class="text-red-600">RUGBY</span></h1>
-            <p class="text-xs font-bold text-gray-400 tracking-widest mt-1">ACADEMY PROTOCOL V2.1 // PAVEL-VERKHOSHANSKY VERIFIED</p>
+            <p class="text-xs font-bold text-gray-400 tracking-widest mt-1">ACADEMY PROTOCOL V2.2 // CLINICALLY OPTIMIZED</p>
         </div>
         <div class="mt-4 md:mt-0 text-right">
             <span class="text-xs font-bold text-gray-500 tracking-widest uppercase"><span class="red-dot"></span>THE FOUR PILLARS</span>
@@ -179,6 +238,28 @@
     </main>
 
     <script>
+        // --- PRE-HAB PANEL LOGIC ---
+        const warmupTrigger = document.getElementById('warmup-trigger');
+        const warmupPanel = document.getElementById('warmup-panel');
+        const warmupOverlay = document.getElementById('warmup-overlay');
+        const closeWarmup = document.getElementById('close-warmup');
+
+        function toggleWarmup() {
+            const isClosed = warmupPanel.classList.contains('translate-x-full');
+            if (isClosed) {
+                warmupPanel.classList.remove('translate-x-full');
+                warmupOverlay.classList.remove('hidden');
+            } else {
+                warmupPanel.classList.add('translate-x-full');
+                warmupOverlay.classList.add('hidden');
+            }
+        }
+
+        warmupTrigger.addEventListener('click', toggleWarmup);
+        closeWarmup.addEventListener('click', toggleWarmup);
+        warmupOverlay.addEventListener('click', toggleWarmup);
+
+
         // --- S&C ENGINE STATE ---
         let state = {
             status: 'GREEN', month: 'SEP', day: 'TH', profile: 'M_ARMOR' 
@@ -194,8 +275,7 @@
             return 'OFF_SEASON';
         }
 
-        // --- DATABASE ARCHITECTURE (PAVEL & VERKHOSHANSKY RULES APPLIED) ---
-        // Every exercise has hardcoded repsA (Armor) and repsP (Power) to prevent "Max Speed Hangs"
+        // --- DATABASE ARCHITECTURE (V2.2 - ANTI-IMPINGEMENT / OLYMPIC REGRESSION) ---
         const templates = {
             EARLY_SEASON: {
                 M: { title: "LOWER MICRO-DOSE & GRIP", primer: stdPrimer, exercises: [
@@ -273,7 +353,7 @@
                     {code: 'A', name: '1:4:2 Box Breathing', repsA: '5 Mins', repsP: '5 Mins', rpe: 'N/A', cue: 'Kill adrenaline.'}
                 ]},
                 F: { title: "POWER MAINTENANCE", primer: stdPrimer, exercises: [
-                    {code: 'A', name: 'Power Cleans / High Pulls', repsA: '3 x 5', repsP: '4 x 2-3', rpe: '8', cue: 'Fast elbows.'}, 
+                    {code: 'A', name: 'KB Soviet High Pulls or Landmine Jerk', repsA: '3 x 5', repsP: '4 x 2-3', rpe: '8', cue: 'Triple extension. Wrist/back safe.'}, 
                     {code: 'B', name: 'Medicine Ball Slams', repsA: '3 x 8', repsP: '4 x 5', rpe: '9', cue: 'Violent extension.'}
                 ]},
                 S: { title: "ABSOLUTE REST", primer: null, exercises: [{code: '-', name: 'Sleep / Hydration', repsA: '-', repsP: '-', rpe: 'N/A', cue: 'Recovery'}] },
@@ -403,10 +483,10 @@
                     finalReps = finalReps + " <span class='text-red-500 text-xs'>(-1 Set)</span>";
                 }
 
-                // Biological Swaps
+                // Biological Swaps (V2.2 Updates)
                 if (finalName === '[M_SWAP_SHRUGS]') {
-                    finalName = isFemale ? 'Nordic Hamstring Curls' : 'Heavy Barbell Shrugs';
-                    finalCue = isFemale ? 'ACL Protection (Verkhoshansky Eccentric).' : 'Upper structural concussion armor.';
+                    finalName = isFemale ? 'Nordic Hamstring Curls' : '4-Way Neck Iso + Heavy Farmer\'s Walk';
+                    finalCue = isFemale ? 'ACL Protection (Verkhoshansky Eccentric).' : 'Concussion armor. Zero shoulder impingement.';
                 }
                 if (finalName === '[F_SWAP_RDL]') {
                     finalName = isFemale ? 'Single-Leg RDLs' : 'Romanian Deadlift';
