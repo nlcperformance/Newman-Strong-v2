@@ -3,232 +3,408 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OP: VANGUARD // ACADEMY S&C SYSTEM</title>
+    <title>Newman Strong v2 | Academy Protocol</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+        /* Typography matching the clean aesthetic */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Oswald:wght@300;400;700&display=swap');
 
         body {
-            font-family: 'JetBrains Mono', monospace;
-            background-color: #050505;
-            color: #e5e5e5;
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .tactical-border {
-            border: 1px solid #1f2937;
+        .title-font {
+            font-family: 'Oswald', sans-serif;
+        }
+
+        /* 01. Status Check Circles */
+        .status-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.2s;
             position: relative;
         }
-
-        .tactical-border::before {
+        .status-circle:hover { border-color: #9ca3af; }
+        .status-circle.active {
+            border: 2px solid #000;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .status-circle.active::after {
             content: '';
             position: absolute;
-            top: -1px; left: -1px;
-            width: 10px; height: 10px;
-            border-top: 2px solid #06b6d4;
-            border-left: 2px solid #06b6d4;
+            bottom: -3px;
+            width: 8px;
+            height: 8px;
+            background-color: #ef4444; /* Red dot indicator */
+            border-radius: 50%;
         }
 
-        .tactical-border::after {
-            content: '';
-            position: absolute;
-            bottom: -1px; right: -1px;
-            width: 10px; height: 10px;
-            border-bottom: 2px solid #06b6d4;
-            border-right: 2px solid #06b6d4;
+        /* Grouped Box Selectors (Months & Days) */
+        .btn-group {
+            display: inline-flex;
+            border: 1px solid #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
         }
-
-        .toggle-btn {
-            background-color: #111827;
+        .btn-group button {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-right: 1px solid #e5e7eb;
+            background: #fff;
             color: #6b7280;
-            border: 1px solid #374151;
-            transition: all 0.2s ease-in-out;
+            transition: all 0.1s;
         }
-        .toggle-btn:hover {
-            color: #e5e5e5;
-            border-color: #4b5563;
-        }
-        .toggle-btn.active {
-            background-color: #06b6d4;
-            color: #000000;
-            border-color: #06b6d4;
-            font-weight: bold;
+        .btn-group button:last-child { border-right: none; }
+        .btn-group button:hover { background: #f9fafb; color: #000; }
+        .btn-group button.active {
+            background: #000;
+            color: #fff;
         }
 
-        .blink { animation: blinker 2s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
+        /* Tabs (Profile Selection) */
+        .tab-btn {
+            padding-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #9ca3af;
+            text-transform: uppercase;
+            border-bottom: 3px solid transparent;
+            margin-right: 24px;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { color: #4b5563; }
+        .tab-btn.active {
+            color: #000;
+            border-bottom: 3px solid #000;
+        }
 
-        .protocol-header { color: #ffffff; font-weight: bold; font-size: 0.9em; display: block; margin-bottom: 4px; margin-top: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 2px; }
-        .protocol-detail { color: #9ca3af; font-size: 0.85em; line-height: 1.5; display: block; margin-bottom: 2px; }
-        .protocol-cue { color: #06b6d4; font-size: 0.75em; font-style: italic; display: block; margin-top: 6px; border-left: 2px solid #06b6d4; padding-left: 8px; font-weight: bold; }
-        .alert-cue { color: #ef4444; font-size: 0.75em; font-style: italic; display: block; margin-top: 6px; border-left: 2px solid #ef4444; padding-left: 8px; font-weight: bold; }
+        /* Table Styling */
+        .table-row {
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .table-row:last-child { border-bottom: none; }
+        
+        /* Red accent dot for Insight */
+        .red-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-8 selection:bg-[#06b6d4] selection:text-black">
+<body class="min-h-screen p-6 md:p-12 max-w-6xl mx-auto">
 
-    <header class="max-w-7xl mx-auto mb-8">
-        <div class="tactical-border p-6 bg-gray-900 shadow-2xl">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-gray-800 pb-4">
-                <h1 class="text-3xl font-bold text-white tracking-tighter uppercase">
-                    <i class="fas fa-project-diagram mr-2 text-[#06b6d4]"></i>Project Vanguard
-                </h1>
-                <span class="text-xs border border-[#06b6d4] text-[#06b6d4] px-2 py-1 rounded mt-2 md:mt-0 font-bold tracking-widest">YOUTH RUGBY S&C MATRIX</span>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                    <span class="text-xs text-gray-500 font-bold tracking-widest block mb-2">OPERATIVE BIOLOGY</span>
-                    <div class="flex space-x-2">
-                        <button id="btn-m" onclick="setGender('M')" class="toggle-btn active flex-1 py-2 text-sm uppercase">Male</button>
-                        <button id="btn-f" onclick="setGender('F')" class="toggle-btn flex-1 py-2 text-sm uppercase">Female</button>
-                    </div>
-                </div>
-                <div>
-                    <span class="text-xs text-gray-500 font-bold tracking-widest block mb-2">TRAINING AGE (GYM)</span>
-                    <div class="flex space-x-2">
-                        <button id="btn-exp-1" onclick="setExp(1)" class="toggle-btn active flex-1 py-2 text-sm uppercase">1-2 Yrs (Armor)</button>
-                        <button id="btn-exp-3" onclick="setExp(3)" class="toggle-btn flex-1 py-2 text-sm uppercase">3-4 Yrs (Power)</button>
-                    </div>
-                </div>
-                <div>
-                    <span class="text-xs text-gray-500 font-bold tracking-widest block mb-2">MACROCYCLE PHASE</span>
-                    <div class="flex space-x-2">
-                        <button id="btn-phase-in" onclick="setPhase('IN')" class="toggle-btn active flex-1 py-2 text-sm uppercase">In-Season</button>
-                        <button id="btn-phase-off" onclick="setPhase('OFF')" class="toggle-btn flex-1 py-2 text-sm uppercase">Off-Season</button>
-                    </div>
-                </div>
-            </div>
+    <!-- HEADER -->
+    <header class="flex flex-col md:flex-row justify-between items-start md:items-end border-b-2 border-gray-100 pb-6 mb-10">
+        <div>
+            <h1 class="text-4xl md:text-5xl font-black tracking-tighter uppercase">NEWMAN<span class="text-red-600">RUGBY</span></h1>
+            <p class="text-xs font-bold text-gray-400 tracking-widest mt-1">ACADEMY PROTOCOL V2.0</p>
+        </div>
+        <div class="mt-4 md:mt-0 text-right">
+            <span class="text-xs font-bold text-gray-500 tracking-widest uppercase"><span class="red-dot"></span>THE FOUR PILLARS</span>
+            <p class="text-sm font-medium text-gray-600 italic mt-1 max-w-md">
+                1. Sleep  //  2. Strength  //  3. Nutrition  //  4. Stress Management.<br>
+                "Without these, performance is irrelevant."
+            </p>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto space-y-4">
-        <div class="tactical-border p-4 bg-gray-900">
-            <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-2">
-                <h2 class="text-white font-bold tracking-widest uppercase"><span class="blink text-[#06b6d4]">●</span> WEEKLY DEPLOYMENT</h2>
-                <span id="dynamic-label" class="text-xs font-bold text-gray-400 uppercase">Calculating Matrix...</span>
+    <!-- CONTROLS SECTION -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-10">
+        
+        <!-- Status Check -->
+        <div>
+            <h2 class="text-xs font-bold tracking-widest mb-4">01. STATUS CHECK</h2>
+            <div class="flex space-x-4">
+                <button onclick="setStatus('GREEN')" id="status-GREEN" class="status-circle active">GREEN</button>
+                <button onclick="setStatus('AMBER')" id="status-AMBER" class="status-circle">AMBER</button>
+                <button onclick="setStatus('RED')" id="status-RED" class="status-circle text-red-600 border-red-100 hover:border-red-300">RED</button>
             </div>
-            
-            <div class="grid gap-3" id="schedule-grid">
+            <p id="status-desc" class="text-xs text-gray-500 mt-4 h-8">100% Capacity. Cleared for prescribed loading.</p>
+        </div>
+
+        <!-- Month & Day Selector -->
+        <div>
+            <h2 class="text-xs font-bold tracking-widest mb-4">02. MACROCYCLE & DAY</h2>
+            <div class="mb-3">
+                <div class="btn-group w-full md:w-auto" id="month-group">
+                    <button onclick="setMonth('SEP')" id="mo-SEP" class="active">SEP</button>
+                    <button onclick="setMonth('OCT')" id="mo-OCT">OCT</button>
+                    <button onclick="setMonth('NOV')" id="mo-NOV">NOV</button>
+                    <button onclick="setMonth('DEC')" id="mo-DEC">DEC</button>
+                    <button onclick="setMonth('JAN')" id="mo-JAN">JAN</button>
+                    <button onclick="setMonth('FEB')" id="mo-FEB">FEB</button>
+                    <button onclick="setMonth('MAR')" id="mo-MAR">MAR</button>
+                    <button onclick="setMonth('OFF')" id="mo-OFF" class="bg-gray-100">OFF-SEASON</button>
                 </div>
+            </div>
+            <div>
+                <div class="btn-group" id="day-group">
+                    <button onclick="setDay('M')" id="day-M">M</button>
+                    <button onclick="setDay('T')" id="day-T">T</button>
+                    <button onclick="setDay('W')" id="day-W">W</button>
+                    <button onclick="setDay('TH')" id="day-TH" class="active">T</button>
+                    <button onclick="setDay('F')" id="day-F">F</button>
+                    <button onclick="setDay('S')" id="day-S">S</button>
+                    <button onclick="setDay('SU')" id="day-SU">S</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLAYER PROFILE SECTION -->
+    <div class="mb-8">
+        <h2 class="text-xs font-bold tracking-widest mb-4">03. PLAYER PROFILE</h2>
+        <div class="flex flex-wrap border-b border-gray-200" id="profile-tabs">
+            <button onclick="setProfile('M_ARMOR')" id="prof-M_ARMOR" class="tab-btn active">MALE (1-2 YRS)</button>
+            <button onclick="setProfile('M_POWER')" id="prof-M_POWER" class="tab-btn">MALE (3-4 YRS)</button>
+            <button onclick="setProfile('F_ARMOR')" id="prof-F_ARMOR" class="tab-btn">FEMALE (1-2 YRS)</button>
+            <button onclick="setProfile('F_POWER')" id="prof-F_POWER" class="tab-btn">FEMALE (3-4 YRS)</button>
+        </div>
+        <p id="profile-desc" class="text-sm text-gray-500 mt-4 uppercase">
+            HYPERTROPHY/ARMOR FOCUS. Moderate weights. Structural development for collision absorption.
+        </p>
+    </div>
+
+    <!-- CAPACITY BAR -->
+    <div class="mb-12">
+        <div class="flex justify-between items-end mb-1">
+            <span class="text-xs font-bold tracking-widest">TRAINING CAPACITY</span>
+            <span id="capacity-text" class="text-xs font-bold">100%</span>
+        </div>
+        <div class="w-full h-1 bg-gray-200">
+            <div id="capacity-bar" class="h-1 bg-black w-full transition-all duration-500"></div>
+        </div>
+    </div>
+
+    <!-- MAIN WORKOUT SECTION -->
+    <main>
+        <div class="mb-8">
+            <h2 id="day-title" class="text-5xl font-light title-font tracking-tight uppercase">THURSDAY</h2>
+            <h3 id="day-subtitle" class="text-sm font-bold text-gray-400 tracking-widest uppercase mt-2">ARMOR + GRIP</h3>
+        </div>
+
+        <!-- Table Header -->
+        <div class="grid grid-cols-12 gap-4 pb-2 border-b border-black text-xs font-bold text-gray-400 tracking-widest uppercase">
+            <div class="col-span-1">CODE</div>
+            <div class="col-span-6 md:col-span-7">EXERCISE</div>
+            <div class="col-span-2">SET/REP</div>
+            <div class="col-span-3 md:col-span-2 text-right">CUE</div>
+        </div>
+
+        <!-- Table Body -->
+        <div id="workout-table" class="mt-2">
+            <!-- JS Injects Here -->
         </div>
     </main>
 
     <script>
+        // --- S&C ENGINE STATE ---
         let state = {
-            gender: 'M', // M or F
-            exp: 1,      // 1 (Foundation) or 3 (Advanced)
-            phase: 'IN'  // IN or OFF
+            status: 'GREEN', // GREEN, AMBER, RED
+            month: 'SEP',    // SEP, OCT, NOV, DEC, JAN, FEB, MAR, OFF
+            day: 'TH',       // M, T, W, TH, F, S, SU
+            profile: 'M_ARMOR' // M_ARMOR, M_POWER, F_ARMOR, F_POWER
         };
 
-        const domSchedule = document.getElementById('schedule-grid');
-        const domLabel = document.getElementById('dynamic-label');
+        // --- DATABASE ---
+        const dayNames = { M: 'MONDAY', T: 'TUESDAY', W: 'WEDNESDAY', TH: 'THURSDAY', F: 'FRIDAY', S: 'SATURDAY', SU: 'SUNDAY' };
 
-        function setGender(g) {
-            state.gender = g;
-            document.getElementById('btn-m').classList.toggle('active', g === 'M');
-            document.getElementById('btn-f').classList.toggle('active', g === 'F');
-            renderSchedule();
+        // Determine macrocycle phase based on month
+        function getPhase() {
+            if (['SEP', 'OCT'].includes(state.month)) return 'EARLY_SEASON';
+            if (['NOV', 'DEC', 'JAN'].includes(state.month)) return 'MID_SEASON';
+            if (['FEB', 'MAR'].includes(state.month)) return 'LATE_SEASON';
+            return 'OFF_SEASON';
         }
 
-        function setExp(e) {
-            state.exp = e;
-            document.getElementById('btn-exp-1').classList.toggle('active', e === 1);
-            document.getElementById('btn-exp-3').classList.toggle('active', e === 3);
-            renderSchedule();
-        }
-
-        function setPhase(p) {
-            state.phase = p;
-            document.getElementById('btn-phase-in').classList.toggle('active', p === 'IN');
-            document.getElementById('btn-phase-off').classList.toggle('active', p === 'OFF');
-            renderSchedule();
-        }
-
-        function getRepRange() {
-            return state.exp === 1 ? "3 sets x 6-8 reps (Hypertrophy/Armor)" : "4 sets x 3-5 reps (Pure CNS/Power)";
-        }
-
-        function getBioCue() {
-            if (state.gender === 'F') {
-                return `<span class="alert-cue">BIO-CUE (FEMALE): Prioritize posterior chain. RDLs, Nordics, and Eccentric landing mechanics mandatory to counter ACL risk/Q-Angle.</span>`;
-            } else {
-                return `<span class="protocol-cue">BIO-CUE (MALE): Prioritize upper body structural armor. Heavy shrugs, neck isometrics, and upper back density to absorb tackle impact.</span>`;
+        // Base templates (The "What")
+        const templates = {
+            EARLY_SEASON: {
+                M: { title: "LOWER MICRO-DOSE", exercises: [{code: 'A', name: 'Goblet Box Squat', cue: 'Limit ROM'}, {code: 'B', name: 'Suitcase Carries', cue: 'Anti-flexion'}, {code: 'C', name: 'RKC Plank', cue: 'Full tension'}] },
+                T: { title: "UPPER NEURAL PRIMER", exercises: [{code: 'A', name: 'Med Ball Rotational Throws', cue: 'Max velocity'}, {code: 'B', name: 'Push-ups', cue: 'Explosive'}, {code: 'C', name: 'Band Pull-Aparts', cue: 'Scapular health'}] },
+                W: { title: "MATCH DAY", exercises: [{code: 'A', name: 'Pre-Match Mobility Flow', cue: 'Dynamic'}, {code: 'B', name: 'Game Execution', cue: 'Redline'}] },
+                TH: { title: "POST-MATCH TRIAGE", exercises: [{code: 'A', name: 'Passive Bar Hang', cue: 'Decompress spine'}, {code: 'B', name: 'Wall Sit', cue: 'Tendon relief'}, {code: 'C', name: 'Nasal Breathing Walk', cue: 'Flush system'}] },
+                F: { title: "ARMOR MAINTENANCE", exercises: [{code: 'A', name: 'Trap Bar Deadlift', cue: 'Perfect spine'}, {code: 'B', name: 'Heavy DB Row', cue: 'Squeeze lats'}, {code: 'C', name: '[M_SWAP_SHRUGS]', cue: 'Armor/Prehab'}] },
+                S: { title: "ABSOLUTE REST", exercises: [{code: 'A', name: 'Sleep / Hydration', cue: 'Recovery'}, {code: 'B', name: 'Mental Disconnect', cue: 'Parasympathetic'}] },
+                SU: { title: "ZONE 2 BASE", exercises: [{code: 'A', name: 'Light Ruck or Row', cue: 'HR < 140bpm'}, {code: 'B', name: 'Joint Mobility', cue: 'Grease grooves'}] }
+            },
+            MID_SEASON: { // The Grind - Reduce volume, maintain armor
+                M: { title: "ISOMETRIC LOWER", exercises: [{code: 'A', name: 'Heavy Sled Push', cue: 'Concentric only'}, {code: 'B', name: 'Copenhagen Plank', cue: 'Adductor health'}, {code: 'C', name: 'Dead Bug', cue: 'Core control'}] },
+                T: { title: "UPPER SPEED", exercises: [{code: 'A', name: 'DB Push Press', cue: 'Use legs'}, {code: 'B', name: 'Chest Supported Row', cue: 'Protect low back'}] },
+                W: { title: "MATCH DAY", exercises: [{code: 'A', name: 'Pre-Match Mobility Flow', cue: 'Dynamic'}, {code: 'B', name: 'Game Execution', cue: 'Redline'}] },
+                TH: { title: "TRIAGE & RECOVERY", exercises: [{code: 'A', name: 'Stationary Bike', cue: 'Flush legs'}, {code: 'B', name: 'Foam Roll / Soft Tissue', cue: 'Release fascia'}] },
+                F: { title: "HEAVY SINGLES", exercises: [{code: 'A', name: 'Box Squat', cue: 'Velocity focus'}, {code: 'B', name: 'Strict Pull-ups', cue: 'Full range'}] },
+                S: { title: "ABSOLUTE REST", exercises: [{code: 'A', name: 'Sleep / Hydration', cue: 'Recovery'}] },
+                SU: { title: "ACTIVE RECOVERY", exercises: [{code: 'A', name: 'Light Swimming / Walk', cue: 'Zero impact'}] }
+            },
+            LATE_SEASON: { // Peaking - Highly neural, alactic
+                M: { title: "ALACTIC PRIMER", exercises: [{code: 'A', name: 'Broad Jumps', cue: 'Reset every rep'}, {code: 'B', name: 'Heavy Kettlebell Swings', cue: 'Glute snap'}] },
+                T: { title: "SPEED & SKILL", exercises: [{code: 'A', name: 'Contrast Push-ups', cue: 'Band resisted to free'}, {code: 'B', name: 'Rotational Core', cue: 'Speed'}] },
+                W: { title: "FINALS PREP", exercises: [{code: 'A', name: 'Game Execution', cue: 'Peak output'}] },
+                TH: { title: "CNS RESET", exercises: [{code: 'A', name: '1:4:2 Box Breathing', cue: 'Kill adrenaline'}] },
+                F: { title: "POWER MAINTENANCE", exercises: [{code: 'A', name: 'Power Cleans / High Pulls', cue: 'Fast elbows'}, {code: 'B', name: 'Medicine Ball Slams', cue: 'Violent extension'}] },
+                S: { title: "ABSOLUTE REST", exercises: [{code: 'A', name: 'Sleep / Hydration', cue: 'Recovery'}] },
+                SU: { title: "TACTICAL PREP", exercises: [{code: 'A', name: 'Film Study / Walkthrough', cue: 'Mental'}] }
+            },
+            OFF_SEASON: { // Building Mass/Power
+                M: { title: "MAXIMAL LOWER", exercises: [{code: 'A', name: 'Barbell Back/Front Squat', cue: 'Depth & Drive'}, {code: 'B', name: '[F_SWAP_RDL]', cue: 'Posterior chain'}, {code: 'C', name: 'Weighted Carries', cue: 'Core stiffness'}] },
+                T: { title: "MAXIMAL UPPER", exercises: [{code: 'A', name: 'Bench Press / Floor Press', cue: 'Lockout'}, {code: 'B', name: 'Weighted Pull-ups', cue: 'Lat dominant'}, {code: 'C', name: 'Overhead Press', cue: 'Core braced'}] },
+                W: { title: "FIELD CONDITIONING", exercises: [{code: 'A', name: 'Tempo Runs', cue: 'Aerobic power'}, {code: 'B', name: 'Agility Ladder/Cones', cue: 'Footwork'}] },
+                TH: { title: "ALACTIC ENGINE", exercises: [{code: 'A', name: 'Overspeed KB Swings', cue: '10s On / 50s Off'}, {code: 'B', name: 'Sprints (10-20m)', cue: 'Full recovery between'}] },
+                F: { title: "FULL BODY CONTRAST", exercises: [{code: 'A1', name: 'Heavy Trap Bar DL', cue: 'Force'}, {code: 'A2', name: 'Vertical Jump', cue: 'Speed'}, {code: 'B', name: '[M_SWAP_SHRUGS]', cue: 'Armor'}] },
+                S: { title: "REST OR PICKUP", exercises: [{code: 'A', name: 'Pickup Touch Rugby', cue: 'Play'}] },
+                SU: { title: "LONG ZONE 2", exercises: [{code: 'A', name: '5k Ruck or 10k Bike', cue: 'Base building'}] }
             }
+        };
+
+        // Red Status Override
+        const redOverride = {
+            title: "CNS TRIAGE (RED STATUS)",
+            exercises: [
+                {code: '-', name: '1:4:2 Breathing Protocol', cue: '10 minutes'},
+                {code: '-', name: 'Passive Hangs', cue: '3 x 30s'},
+                {code: '-', name: 'Light Zone 1 Walk', cue: 'Nasal breathing only'}
+            ]
+        };
+
+        // --- RENDER FUNCTIONS ---
+
+        function updateUI() {
+            // Status update
+            ['GREEN', 'AMBER', 'RED'].forEach(s => {
+                const el = document.getElementById(`status-${s}`);
+                el.classList.remove('active', 'border-black', 'border-red-600', 'border-2');
+                if (s === state.status) {
+                    el.classList.add('active');
+                    if (s === 'RED') el.classList.add('border-red-600', 'border-2');
+                    else el.classList.add('border-black', 'border-2');
+                }
+            });
+
+            const statusDescs = {
+                'GREEN': '100% Capacity. Cleared for prescribed loading.',
+                'AMBER': '70% Capacity. Reduce working sets by 1. Cap intensity at RPE 7.',
+                'RED': '0% Capacity. CNS exhausted. Mandatory recovery protocol active.'
+            };
+            document.getElementById('status-desc').innerText = statusDescs[state.status];
+
+            // Capacity Bar
+            const capBar = document.getElementById('capacity-bar');
+            const capText = document.getElementById('capacity-text');
+            if (state.status === 'GREEN') { capBar.style.width = '100%'; capBar.className = 'h-1 bg-black w-full transition-all duration-500'; capText.innerText = '100%'; }
+            if (state.status === 'AMBER') { capBar.style.width = '70%'; capBar.className = 'h-1 bg-yellow-500 w-full transition-all duration-500'; capText.innerText = '70%'; }
+            if (state.status === 'RED') { capBar.style.width = '15%'; capBar.className = 'h-1 bg-red-600 w-full transition-all duration-500'; capText.innerText = 'RECOVERY'; }
+
+            // Month Update
+            ['SEP','OCT','NOV','DEC','JAN','FEB','MAR','OFF'].forEach(m => {
+                document.getElementById(`mo-${m}`).classList.toggle('active', m === state.month);
+            });
+
+            // Day Update
+            ['M','T','W','TH','F','S','SU'].forEach(d => {
+                document.getElementById(`day-${d}`).classList.toggle('active', d === state.day);
+            });
+
+            // Profile Update
+            ['M_ARMOR','M_POWER','F_ARMOR','F_POWER'].forEach(p => {
+                document.getElementById(`prof-${p}`).classList.toggle('active', p === state.profile);
+            });
+
+            const profileDescs = {
+                'M_ARMOR': 'MALE (1-2 YRS) // HYPERTROPHY FOCUS. Moderate weights. Structural development for collision padding.',
+                'M_POWER': 'MALE (3-4 YRS) // PURE CNS POWER. Low volume, high intensity. Speed and absolute force.',
+                'F_ARMOR': 'FEMALE (1-2 YRS) // POSTERIOR ARMOR. Hamstring/Glute dominance. ACL protection and movement mechanics.',
+                'F_POWER': 'FEMALE (3-4 YRS) // ELASTIC POWER. High force absorption. Tendon stiffness and explosive acceleration.'
+            };
+            document.getElementById('profile-desc').innerText = profileDescs[state.profile];
+
+            renderTable();
         }
 
-        function renderSchedule() {
-            const rRange = getRepRange();
-            const bioCue = getBioCue();
+        function renderTable() {
+            const phase = getPhase();
+            let dayData = templates[phase][state.day];
             
-            let html = ``;
+            // Apply RED status override if necessary (except on rest days)
+            if (state.status === 'RED' && !['S', 'W'].includes(state.day)) {
+                dayData = redOverride;
+            }
+
+            document.getElementById('day-title').innerText = dayNames[state.day];
+            document.getElementById('day-subtitle').innerText = dayData.title;
+
+            let isFemale = state.profile.includes('F_');
+            let isPower = state.profile.includes('POWER');
+
+            // Set/Rep logic based on profile and status
+            let repsBase = isPower ? "4 x 3-5" : "3 x 8-12";
+            let timeBase = isPower ? "4 x Max Speed" : "3 x 45s";
             
-            // MONDAY
-            let monPitch = state.gender === 'M' ? 'Boys Skills & Rugby' : 'Light Technical Flow';
-            let monGym = state.phase === 'OFF' ? 
-                `<span class="protocol-header mt-0">HEAVY LOWER BODY LIFT</span><span class="protocol-detail">Squat/Hinge primary day. ${rRange}.</span>` : 
-                `<span class="protocol-header mt-0">MICRO-DOSE LIFT (POST-SUNDAY)</span><span class="protocol-detail">Armor building only. 15 mins. Upper back, core stiffness.</span>`;
+            // Amber status penalty
+            if (state.status === 'AMBER' && state.day !== 'S' && state.day !== 'SU') {
+                repsBase = isPower ? "3 x 3-5 (RPE 7)" : "2 x 8-12 (RPE 7)";
+                timeBase = "2 x 30s";
+            }
+
+            let html = '';
             
-            html += createDayRow('MON', monPitch, monGym + bioCue, 'border-gray-700');
+            dayData.exercises.forEach(ex => {
+                let finalName = ex.name;
+                let finalCue = ex.cue;
+                let finalReps = finalName.includes('Plank') || finalName.includes('Hang') || finalName.includes('Wall Sit') ? timeBase : repsBase;
 
-            // TUESDAY
-            let tuePitch = state.gender === 'M' ? 'Boys Skills' : 'Girls Pitch Match Prep';
-            let tueGym = state.phase === 'OFF' ? 
-                `<span class="protocol-header mt-0">UPPER BODY ARMOR</span><span class="protocol-detail">Press/Pull supersets. ${rRange}.</span>` : 
-                `<span class="protocol-header mt-0">PRE-MATCH NEURAL PRIMER</span><span class="protocol-detail">Alactic sprints. Medicine ball throws. Zero heavy barbell load.</span>`;
-            
-            html += createDayRow('TUE', tuePitch, tueGym, 'border-gray-700');
+                // Rest days overrides
+                if (['S', 'SU', 'W'].includes(state.day) || state.status === 'RED') finalReps = 'N/A';
 
-            // WEDNESDAY
-            let wedText = state.phase === 'IN' ? 
-                `<span class="protocol-header mt-0 text-[#06b6d4]">MATCH DAY</span><span class="protocol-detail">Maximum arousal. Redline execution.</span>` : 
-                `<span class="protocol-header mt-0 text-gray-400">REST OR PICK-UP GAMES</span><span class="protocol-detail">Active recovery. Zone 2 field movement.</span>`;
-            html += createDayRow('WED', 'Fixture / Pick-ups', wedText, state.phase === 'IN' ? 'border-[#06b6d4]' : 'border-gray-700');
+                // --- BIOLOGICAL SWAPS ---
+                if (finalName === '[M_SWAP_SHRUGS]') {
+                    finalName = isFemale ? 'Nordic Hamstring Curls' : 'Heavy Barbell Shrugs';
+                    finalCue = isFemale ? 'ACL Protection' : 'Concussion Armor';
+                }
+                if (finalName === '[F_SWAP_RDL]') {
+                    finalName = isFemale ? 'Single-Leg RDLs' : 'Romanian Deadlift';
+                    finalCue = isFemale ? 'Knee stability' : 'Hamstring sweep';
+                }
 
-            // THURSDAY
-            let thuPitch = 'Gym & Recovery Protocol';
-            let thuGym = state.phase === 'IN' ? 
-                `<span class="protocol-header mt-0 text-red-400">POST-MATCH TRIAGE</span><span class="protocol-detail">Pool/Bike flush. Isometric holds (yields tendon relief without muscle damage). ZERO high-impact loading.</span>` : 
-                `<span class="protocol-header mt-0">ALACTIC ENGINE BUILD</span><span class="protocol-detail">Overspeed Swings. 10s Work / 50s Rest. Lactic acid strictly prohibited.</span>`;
-            html += createDayRow('THU', thuPitch, thuGym, 'border-gray-700');
+                html += `
+                <div class="grid grid-cols-12 gap-4 py-5 table-row items-center transition-colors hover:bg-gray-50">
+                    <div class="col-span-1 text-sm font-bold text-gray-400">${ex.code}</div>
+                    <div class="col-span-6 md:col-span-7 font-bold text-gray-900">${finalName}</div>
+                    <div class="col-span-2 text-sm font-semibold">${finalReps}</div>
+                    <div class="col-span-3 md:col-span-2 text-sm text-gray-400 italic text-right">${finalCue}</div>
+                </div>`;
+            });
 
-            // FRIDAY
-            let friPitch = 'High Contact / Gym / Speed';
-            let friGym = state.phase === 'IN' ? 
-                `<span class="protocol-header mt-0">SPEED & ARMOR MAXIMIZATION</span><span class="protocol-detail">48hrs post-match window. Heavy, low-volume lifting. ${rRange}.</span><span class="protocol-detail">Contact drills strictly monitored for fatigue.</span>` : 
-                `<span class="protocol-header mt-0">MAXIMAL STRENGTH PHASE</span><span class="protocol-detail">Total body strength. Heavy contrast loading (Heavy lift immediately followed by unweighted jump).</span>`;
-            html += createDayRow('FRI', friPitch, friGym + bioCue, 'border-gray-700');
-
-            // SATURDAY
-            html += createDayRow('SAT', 'Absolute Rest', `<span class="protocol-detail italic text-gray-500">Systemic reboot. No academy mandates.</span>`, 'border-gray-800');
-
-            // SUNDAY
-            let sunText = state.phase === 'IN' ? 
-                `<span class="protocol-header mt-0">CLUB FIXTURE OR HIGH-END CAPACITY</span><span class="protocol-detail">Club match participation or high-intensity Alactic field session for non-selected players.</span>` : 
-                `<span class="protocol-header mt-0">AEROBIC BASE (ZONE 2)</span><span class="protocol-detail">Long slow distance running, rowing, or rucking. HR < 140bpm.</span>`;
-            html += createDayRow('SUN', 'Club / Extension', sunText, 'border-gray-700');
-
-            domSchedule.innerHTML = html;
-            
-            // Update Label
-            const gText = state.gender === 'M' ? 'Male' : 'Female';
-            const eText = state.exp === 1 ? '1-2 Yrs (Armor)' : '3-4 Yrs (Power)';
-            const pText = state.phase === 'IN' ? 'In-Season' : 'Off-Season';
-            domLabel.innerText = `${gText} // ${eText} // ${pText}`;
+            document.getElementById('workout-table').innerHTML = html;
         }
 
-        function createDayRow(day, title, content, borderColor) {
-            return `
-            <div class="grid grid-cols-12 gap-4 bg-gray-950 p-4 border-l-4 ${borderColor}">
-                <div class="col-span-2 md:col-span-1 font-bold text-gray-500 mt-1">${day}</div>
-                <div class="col-span-10 md:col-span-3 font-bold text-white mt-1 uppercase">${title}</div>
-                <div class="col-span-12 md:col-span-8 text-sm text-gray-300">
-                    ${content}
-                </div>
-            </div>`;
-        }
+        // --- SETTERS ---
+        function setStatus(s) { state.status = s; updateUI(); }
+        function setMonth(m) { state.month = m; updateUI(); }
+        function setDay(d) { state.day = d; updateUI(); }
+        function setProfile(p) { state.profile = p; updateUI(); }
 
-        // Initialize
-        renderSchedule();
+        // Init
+        updateUI();
+
     </script>
 </body>
 </html>
